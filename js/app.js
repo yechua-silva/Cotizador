@@ -89,6 +89,51 @@ UI.prototype.mostrarMensaje = (mensaje, tipo) => {
     }, 3000); //Después de tres segundos se elimina el div
 }
 
+UI.prototype.mostrarResultado = (total, seguro) => {
+
+    const {marca, year, tipo} = seguro;
+
+    let textoMarca;
+
+    switch (marca) {
+        case '1':
+            textoMarca = 'Americano'
+            break;
+        case '2':
+            textoMarca = 'Asiático'
+            break;        
+        case '3':
+            textoMarca = 'Europeo'
+            break;
+        default:
+            break;
+    }
+
+    // Crear el resultado
+    const div = document.createElement('div');
+    div.classList.add('mt-10');
+
+    // textContent cuando no tiene html, e innerHTML cuando queremos agregar html
+    div.innerHTML = `
+        <p class="header">Tu Resumen</p>
+        <p class="font-bold">Marca: <span class="font-normal">${textoMarca} </span></p>
+        <p class="font-bold">Año: <span class="font-normal">${year} </span></p>
+        <p class="font-bold">Tipo: <span class="font-normal capitalize">${tipo} </span></p>
+        <p class="font-bold">Total: $<span class="font-normal">${total} </span></p>
+    `;
+
+    const resultadoDiv = document.querySelector('#resultado');
+
+    // Mostrar spinner
+    const spinner = document.querySelector('#cargando');
+    spinner.style.display = 'block';
+
+    setTimeout(() => {
+        spinner.style.display = 'none' // Se borra spinner
+        resultadoDiv.appendChild(div) // Se muestra el resultado
+    }, 3000)
+}
+
 //Instanciar UI
 const ui = new UI();
 
@@ -124,9 +169,16 @@ function cotizarSeguro(e) {
 
     ui.mostrarMensaje('Cotizando... ', 'exito');
 
+    // Ocultar cotizaciones previas
+    const resultados = document.querySelector('#resultado div'); // Se selecciona el div dentro de resultado
+    if (resultados != null) {   // Cuando no hayan resultado sera null, pero si ya se cotizo una vez va a correr el if
+        resultados.remove();
+    }
+
     // Instanciar el seguro
     const seguro = new Seguro(marca, year, tipo)
-    seguro.cotizarSeguro();
+    const total = seguro.cotizarSeguro();
 
     // Utilizar el prototype que va a cotizar
+    ui.mostrarResultado(total, seguro);
 }
