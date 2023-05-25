@@ -30,3 +30,29 @@ const ui = new UI();
 document.addEventListener('DOMContentLoaded', () => {
     ui.llenarOpciones(); //Llena el select con los años..
 })
+
+eventListener();
+function eventListener() {
+    const formulario = document.querySelector('#cotizar-seguro');
+    formulario.addEventListener('submit' , cotizarSeguro)
+}
+
+function cotizarSeguro(e) {
+    e.preventDefault();
+
+    //Leer marca seleccionada
+    const marca = document.querySelector('#marca').value;
+
+    //Leer año seleccionada
+    const year = document.querySelector('#year').value;
+
+    //Leer tipo de cobertura seleccionada
+    const tipo = document.querySelector('input[name="tipo"]:checked').value; // Selector de CSS, para leer input de tipo radio en JS
+
+    //Validación de campos vacíos
+    if (marca === '' || year === '' || tipo === '') {
+        console.log('No paso la validación');
+    } else {
+        console.log('Si paso la validación');
+    }
+}
