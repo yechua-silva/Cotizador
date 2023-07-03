@@ -14,7 +14,7 @@ La aplicación muestra de forma clara y precisa una cotización instantánea bas
 * [LinkedIn](https://www.linkedin.com/in/yechua-silva/)
 
 ## Ver ejemplo en vivo 
-- [https://yechua-silva.github.io/Cotizador/](https://yechua-silva.github.io/Cotizador/)
+- [https://yechua-silva.github.io/Proyecto-Cotizador/](https://yechua-silva.github.io/Proyecto-Cotizador/)
 
 ## Instalación 
 Este proyecto no necesita de instalación. Simplemente abre la carpeta o haz doble click en el .html
